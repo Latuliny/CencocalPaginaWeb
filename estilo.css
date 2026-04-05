@@ -1,48 +1,140 @@
-/* Variables de color con contraste AA */
+/* Variables de color: Azul corporativo y contraste AA */
 :root {
-    --bg-color: #ffffff;
-    --text-color: #333333;
-    --primary-color: #005fcc;
+    --bg-color: #0a2540; /* Azul corporativo oscuro */
+    --bg-section: #113050; /* Un azul un poco más claro para alternar */
+    --text-color: #ffffff; /* Letras blancas para que resalten */
+    --primary-color: #00d4ff; /* Celeste brillante para botones y enlaces */
+}
+
+/* Configuraciones generales y desplazamiento suave */
+html {
+    scroll-behavior: smooth; /* ¡Esto hace que baje suavemente al hacer clic en el menú! */
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
     padding: 0;
 }
 
-/* Ocultar el skip link hasta que se use el teclado */
+/* Ocultar el skip link hasta que se use el teclado (Accesibilidad) */
 .skip-link {
     position: absolute;
     top: -40px;
     left: 0;
     background: var(--primary-color);
-    color: white;
+    color: #000;
     padding: 8px;
     z-index: 100;
 }
+.skip-link:focus { top: 0; }
 
-.skip-link:focus {
-    top: 0;
+:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
 }
 
-/* Foco visible: Requisito de la cápsula interactiva */
-:focus-visible {
-    outline: 3px solid var(--primary-color); /* contraste >= 3:1 */
-    outline-offset: 2px;
-} /* [cite: 227, 228, 229, 230] */
+/* Diseño del Menú (Header) fijo arriba */
+header {
+    background-color: #06182c;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between; /* Separa el logo del menú */
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 2px solid var(--primary-color);
+}
 
-header, main, footer {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+header h1 {
+    margin: 0;
+    color: var(--primary-color);
 }
 
 nav ul {
     list-style: none;
     padding: 0;
+    margin: 0;
     display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+/* Diseño de las secciones para que ocupen espacio en la pantalla */
+section {
+    min-height: 80vh; /* Hace que cada sección ocupe casi toda la pantalla */
+    padding: 80px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Alternar el color de fondo para que se note la división */
+#nosotros {
+    background-color: var(--bg-section);
+}
+
+#historia {
+    background-color: var(--bg-color);
+}
+
+#contacto {
+    background-color: var(--bg-section);
+}
+
+/* Estilos profesionales para el formulario */
+form {
+    display: flex;
+    flex-direction: column;
     gap: 15px;
+    width: 100%;
+    max-width: 400px;
+    background-color: #06182c;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: #000;
+    border: none;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #00a3cc;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #06182c;
 }
