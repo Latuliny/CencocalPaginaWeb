@@ -2,14 +2,15 @@
    VARIABLES Y CONFIGURACIÓN GENERAL
    ========================================= */
 :root {
-    --bg-color: #0a2540; /* Azul corporativo oscuro */
-    --bg-section: #113050; /* Azul un poco más claro para alternar secciones */
-    --text-color: #ffffff; /* Letras blancas para buen contraste AA */
-    --primary-color: #00d4ff; /* Celeste brillante para links y detalles */
+    --bg-color: #0a2540; /* Azul corporativo oscuro (Marino) */
+    --bg-section: #113050; 
+    --text-color: #ffffff; 
+    --primary-color: #00d4ff; 
+    --rojo-cencocal: #e31837;
 }
 
 html {
-    scroll-behavior: smooth; /* Desplazamiento suave al hacer clic en el menú */
+    scroll-behavior: smooth;
 }
 
 body {
@@ -32,23 +33,17 @@ body {
     padding: 8px;
     z-index: 100;
     text-decoration: none;
-    font-weight: bold;
 }
 
 .skip-link:focus {
     top: 0;
 }
 
-:focus-visible {
-    outline: 3px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
 /* =========================================
-   ENCABEZADO (HEADER) MODERNO
+   ENCABEZADO (HEADER)
    ========================================= */
 .header-principal {
-    background-color: #ffffff; /* Fondo blanco limpio */
+    background-color: #ffffff;
     padding: 15px 50px;
     display: flex;
     justify-content: space-between;
@@ -59,11 +54,9 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* Nuevo estilo para la imagen del logo */
 .logo-img {
     height: 50px;
     width: auto;
-    display: block;
 }
 
 nav ul {
@@ -78,87 +71,51 @@ nav a {
     color: #333333;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1rem;
     transition: color 0.3s ease;
 }
 
-nav a:hover, nav a:focus {
-    color: #0a2540;
+/* EFECTO PEDIDO: Azul marino al pasar el mouse o presionar */
+nav a:hover, nav a:focus, nav a:active {
+    color: var(--bg-color);
 }
 
 .btn-tienda {
-    background-color: #e31837; /* Rojo corporativo */
+    background-color: var(--rojo-cencocal);
     color: #ffffff;
     padding: 10px 24px;
     text-decoration: none;
     font-weight: bold;
     border-radius: 25px;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.btn-tienda:hover, .btn-tienda:focus {
-    background-color: #b3122a;
+/* EFECTO PEDIDO: Botón azul marino al presionar */
+.btn-tienda:active {
+    background-color: var(--bg-color);
+    transform: scale(0.95);
 }
 
 /* =========================================
-   SECCIONES PRINCIPALES
+   SECCIONES Y GRILLA
    ========================================= */
 section {
-    min-height: 80vh;
     padding: 80px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     text-align: center;
 }
 
-#nosotros {
-    background-color: var(--bg-section);
-}
+#nosotros { background-color: var(--bg-section); }
 
-#historia {
-    background-color: var(--bg-color);
-}
-
-#contacto {
-    background-color: var(--bg-section);
-}
-
-/* =========================================
-   SECCIÓN DE MARCAS Y PROYECTOS
-   ========================================= */
-section.seccion-blanca {
+.seccion-blanca {
     background-color: #ffffff;
     color: #0a2540;
-    min-height: auto; /* Esta sección se ajusta a su contenido */
 }
 
 .contenedor-marcas {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     max-width: 1000px;
-    width: 100%;
     margin: 0 auto;
+    display: flex;
     gap: 40px;
-}
-
-.texto-marcas {
-    flex: 1;
-    text-align: left;
-}
-
-.texto-marcas h2 {
-    font-size: 2.2rem;
-    font-weight: normal;
-    color: #333333;
-    margin: 0;
-}
-
-.texto-marcas strong {
-    color: #0a2540;
-    font-size: 2.5rem;
+    align-items: center;
 }
 
 .grilla-marcas {
@@ -170,70 +127,39 @@ section.seccion-blanca {
 
 .marca-item {
     background-color: #f4f4f4;
-    border-radius: 8px;
     padding: 20px;
-    text-align: center;
-    font-weight: bold;
-    color: #555;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 80px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
-}
-
-.marca-item:hover {
-    transform: scale(1.05); /* Efecto 3D al pasar el mouse */
-}
-
-/* =========================================
-   FORMULARIO DE CONTACTO
-   ========================================= */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-    max-width: 400px;
-    background-color: #06182c;
-    padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    text-align: left;
-}
-
-label {
     font-weight: bold;
-}
-
-input, textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-family: inherit;
-}
-
-button[type="submit"] {
-    background-color: var(--primary-color);
-    color: #000;
-    border: none;
-    padding: 12px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background 0.3s ease;
-}
-
-button[type="submit"]:hover, button[type="submit"]:focus {
-    background-color: #00a3cc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 /* =========================================
-   PIE DE PÁGINA (FOOTER)
+   DISEÑO RESPONSIVO (MEDIA QUERIES) 
+   Exigido por rúbrica 
+   ========================================= */
+@media (max-width: 768px) {
+    .header-principal {
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    nav ul {
+        gap: 15px;
+        font-size: 0.9rem;
+    }
+
+    .contenedor-marcas {
+        flex-direction: column;
+    }
+
+    .grilla-marcas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* =========================================
+   PIE DE PÁGINA
    ========================================= */
 footer {
     text-align: center;
