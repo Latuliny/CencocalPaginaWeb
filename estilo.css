@@ -2,11 +2,12 @@
    VARIABLES Y CONFIGURACIÓN GENERAL
    ========================================= */
 :root {
-    --bg-color: #0a2540; /* Azul corporativo oscuro (Marino) */
+    --bg-color: #0a2540; 
     --bg-section: #113050; 
     --text-color: #ffffff; 
     --primary-color: #00d4ff; 
-    --rojo-cencocal: #e31837;
+    --cencocal-purple: #311b92;
+    --cencocal-green: #8cc63f;
 }
 
 html {
@@ -14,11 +15,12 @@ html {
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Usando Google Fonts */
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
     padding: 0;
+    font-size: 16px; /* Mínimo requerido por accesibilidad */
 }
 
 /* =========================================
@@ -33,6 +35,7 @@ body {
     padding: 8px;
     z-index: 100;
     text-decoration: none;
+    font-weight: bold;
 }
 
 .skip-link:focus {
@@ -40,7 +43,7 @@ body {
 }
 
 /* =========================================
-   ENCABEZADO (HEADER)
+   ENCABEZADO (HEADER) CON NUEVO LOGO
    ========================================= */
 .header-principal {
     background-color: #ffffff;
@@ -54,11 +57,41 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.logo-img {
-    height: 50px;
-    width: auto;
+.logo-nuevo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
 }
 
+.texto-cencocal {
+    color: var(--cencocal-purple);
+    font-weight: bold;
+    display: flex;
+    align-items: baseline;
+}
+
+.texto-cencocal .titulo {
+    font-size: 2.2rem;
+    letter-spacing: -1px;
+}
+
+.texto-cencocal .sa {
+    font-size: 1rem;
+    margin-left: 5px;
+}
+
+.etiqueta-verde {
+    background-color: var(--cencocal-green);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 3px 15px;
+    border-radius: 15px;
+    margin-top: 2px;
+}
+
+/* Navegación y efectos de clic */
 nav ul {
     list-style: none;
     padding: 0;
@@ -71,58 +104,56 @@ nav a {
     color: #333333;
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s ease;
+    transition: 0.3s;
 }
 
-/* EFECTO PEDIDO: Azul marino al pasar el mouse o presionar */
 nav a:hover, nav a:focus, nav a:active {
-    color: var(--bg-color);
+    color: var(--bg-color); /* Color azul marino al presionar */
 }
 
 .btn-tienda {
-    background-color: var(--rojo-cencocal);
+    background-color: #e31837;
     color: #ffffff;
     padding: 10px 24px;
     text-decoration: none;
     font-weight: bold;
     border-radius: 25px;
-    transition: all 0.3s ease;
 }
 
-/* EFECTO PEDIDO: Botón azul marino al presionar */
 .btn-tienda:active {
-    background-color: var(--bg-color);
-    transform: scale(0.95);
+    background-color: var(--bg-color); /* Cambia a azul marino al hacer clic */
 }
 
 /* =========================================
-   SECCIONES Y GRILLA
+   SECCIONES
    ========================================= */
 section {
     padding: 80px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
 #nosotros { background-color: var(--bg-section); }
+#historia { background-color: var(--bg-color); }
 
-.seccion-blanca {
+section.seccion-blanca {
     background-color: #ffffff;
-    color: #0a2540;
+    color: #333;
 }
 
 .contenedor-marcas {
     max-width: 1000px;
+    width: 100%;
     margin: 0 auto;
-    display: flex;
-    gap: 40px;
-    align-items: center;
 }
 
 .grilla-marcas {
-    flex: 2;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    margin-top: 30px;
 }
 
 .marca-item {
@@ -130,39 +161,55 @@ section {
     padding: 20px;
     border-radius: 8px;
     font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 /* =========================================
-   DISEÑO RESPONSIVO (MEDIA QUERIES) 
-   Exigido por rúbrica 
+   FORMULARIO Y FOOTER
+   ========================================= */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+    background: #06182c;
+    padding: 25px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #06182c;
+}
+
+/* =========================================
+   DISEÑO RESPONSIVO (Puntos para la Rúbrica)
    ========================================= */
 @media (max-width: 768px) {
     .header-principal {
         flex-direction: column;
-        padding: 15px;
+        padding: 20px;
         gap: 15px;
     }
 
     nav ul {
         gap: 15px;
-        font-size: 0.9rem;
-    }
-
-    .contenedor-marcas {
-        flex-direction: column;
     }
 
     .grilla-marcas {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
     }
 }
 
-/* =========================================
-   PIE DE PÁGINA
-   ========================================= */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #06182c;
+@media (max-width: 480px) {
+    .grilla-marcas {
+        grid-template-columns: 1fr; /* 1 columna en celulares */
+    }
+    
+    .texto-cencocal .titulo {
+        font-size: 1.8rem;
+    }
 }
