@@ -132,9 +132,16 @@ h2 {
 
 .grilla-marcas {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    /* Cambio clave para asegurar simetría 3x3 en PC */
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
     margin-top: 30px;
+    justify-items: center; 
+}
+
+.marca-item {
+    width: 100%;
+    max-width: 250px; 
 }
 
 /* Efecto Giratorio 3D */
