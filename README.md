@@ -20,3 +20,8 @@ Elegimos trabajar con CENCOCAL porque tenemos una relación cercana con la empre
 ## Integrantes del grupo y roles
 * **Leandro vasquez** - Estructura de la página y estilos (HTML/CSS).
 * **Bastian Guerra** - Estructura de la página y estilos (HTML/CSS).
+
+
+
+PAGINA :
+https://latuliny.github.io/CencocalPaginaWeb/
