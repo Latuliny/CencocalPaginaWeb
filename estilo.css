@@ -135,41 +135,70 @@ h2::after {
     border-radius: 2px;
 }
 
-/* SECCIONES Y TEXTOS */
+/* SECCIONES Y CONTENIDO FLEXIBLE (CON IMAGEN) */
 section { padding: 90px 20px; text-align: center; }
 #nosotros { background-color: var(--bg-section); }
 
-.contenido-texto {
-    max-width: 850px; 
+.contenido-flexible {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    max-width: 1100px;
     margin: 0 auto;
+    text-align: left; /* Texto alineado a la izquierda en PC */
+}
+
+/* Clase para invertir el orden de texto e imagen */
+.contenido-flexible.reverse {
+    flex-direction: row-reverse;
+}
+
+.contenido-texto {
+    flex: 1;
     line-height: 1.8; 
     font-size: 1.1rem;
     color: #f0f0f0;
 }
 
-/* MARCAS Y FLIP CARDS CON EFECTO DE VUELO */
+.contenido-texto p { margin-bottom: 20px; }
+
+.contenido-imagen {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.img-seccion {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.img-seccion:hover {
+    transform: scale(1.03);
+}
+
+/* MARCAS Y FLIP CARDS */
 .seccion-blanca { background-color: #fff; color: #333; }
 .contenedor-marcas { max-width: 1000px; margin: 0 auto; text-align: center; }
 
 .grilla-marcas {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 50px; /* AUMENTAMOS LA SEPARACIÓN AQUÍ */
+    gap: 50px;
     margin-top: 40px;
     justify-items: center; 
-    align-items: center; /* ESTO EVITA QUE SE ESTIREN VERTICALMENTE */
+    align-items: center; 
 }
 
-/* Achicamos un poco el ancho máximo para dar más aire entre tarjetas */
-.marca-item { 
-    width: 100%; 
-    max-width: 220px; 
-}
+.marca-item { width: 100%; max-width: 220px; }
 
 .flip-card {
     background-color: transparent;
     perspective: 1000px;
-    aspect-ratio: 1 / 1; /* Mantiene el cuadrado perfecto */
+    aspect-ratio: 1 / 1; 
     cursor: pointer;
 }
 
@@ -183,7 +212,6 @@ section { padding: 90px 20px; text-align: center; }
     border-radius: 10px;
 }
 
-/* Efecto Hover: Vuela y Gira */
 .flip-card:hover .flip-card-inner {
     transform: translateY(-12px) rotateY(180deg);
     box-shadow: 0 15px 30px rgba(0,0,0,0.2);
@@ -199,7 +227,7 @@ section { padding: 90px 20px; text-align: center; }
     align-items: center;
     border-radius: 10px;
     padding: 20px;
-    box-sizing: border-box; /* Asegura que el padding no rompa el cuadrado */
+    box-sizing: border-box;
 }
 
 .flip-card-front {
@@ -216,13 +244,9 @@ section { padding: 90px 20px; text-align: center; }
     border: 1px solid #eaeaea;
 }
 
-.flip-card-back img { 
-    max-width: 85%; 
-    max-height: 85%; 
-    object-fit: contain; 
-}
+.flip-card-back img { max-width: 85%; max-height: 85%; object-fit: contain; }
 
-/* FORMULARIO (ESTILO ORIGINAL) */
+/* FORMULARIO */
 form {
     max-width: 450px;
     margin: 0 auto;
@@ -250,13 +274,20 @@ button {
 /* FOOTER */
 footer { padding: 30px; text-align: center; background: #051626; font-size: 0.9rem; }
 
-/* RESPONSIVO */
+/* DISEÑO RESPONSIVO */
 @media (max-width: 900px) {
     .header-principal { flex-direction: column; padding: 20px; gap: 15px; }
     .hero-overlay h1 { font-size: 2.5rem; }
 }
 
 @media (max-width: 768px) {
+    /* En móvil, ponemos imagen y texto uno debajo del otro */
+    .contenido-flexible, .contenido-flexible.reverse {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
     .grilla-marcas { grid-template-columns: repeat(2, 1fr); gap: 30px; }
     h2 { font-size: 2rem; }
 }
