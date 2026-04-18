@@ -11,12 +11,12 @@
 /* CONFIGURACIÓN GENERAL */
 html { scroll-behavior: smooth; }
 body {
-    font-family: 'Poppins', sans-serif; /* Nueva tipografía */
+    font-family: 'Poppins', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
     padding: 0;
-    font-size: 16px; /* Cumple con accesibilidad */
+    font-size: 16px; 
 }
 
 /* ACCESIBILIDAD */
@@ -79,7 +79,7 @@ body {
     transition: background 0.3s;
 }
 
-/* SECCIÓN HERO (BANNER CON LOGO2.PNG) */
+/* SECCIÓN HERO (BANNER) */
 .hero-banner {
     background: linear-gradient(rgba(10, 37, 64, 0.75), rgba(10, 37, 64, 0.75)), url('assets/logo2.png');
     background-size: cover;
@@ -110,9 +110,9 @@ section { padding: 80px 20px; text-align: center; }
 #nosotros { background-color: var(--bg-section); }
 
 .contenido-texto {
-    max-width: 850px; /* Limita el ancho para que no cruce toda la pantalla */
+    max-width: 850px; 
     margin: 0 auto;
-    line-height: 1.8; /* Más espacio entre líneas */
+    line-height: 1.8; 
     font-size: 1.1rem;
     color: #f0f0f0;
     text-align: center;
@@ -126,16 +126,73 @@ h2 {
     color: var(--primary-color);
 }
 
-/* MARCAS */
+/* MARCAS Y FLIP CARDS */
 .seccion-blanca { background-color: #fff; color: #333; }
-.contenedor-marcas { max-width: 1000px; margin: 0 auto; }
+.contenedor-marcas { max-width: 1000px; margin: 0 auto; text-align: center; }
+
 .grilla-marcas {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
     margin-top: 30px;
 }
-.marca-item { background-color: #f4f4f4; padding: 25px; border-radius: 8px; font-weight: 600; color: var(--bg-color); }
+
+/* Efecto Giratorio 3D */
+.flip-card {
+    background-color: transparent;
+    perspective: 1000px;
+    aspect-ratio: 1 / 1; 
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.flip-card-front {
+    background-color: #f4f4f4;
+    color: var(--cencocal-purple);
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-bottom: 4px solid var(--cencocal-green);
+}
+
+.flip-card-back {
+    background-color: #ffffff;
+    transform: rotateY(180deg);
+    border: 1px solid #eaeaea;
+}
+
+.flip-card-back img {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    display: block;
+}
 
 /* FORMULARIO */
 form {
