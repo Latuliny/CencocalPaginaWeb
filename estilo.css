@@ -11,12 +11,12 @@
 /* CONFIGURACIÓN GENERAL */
 html { scroll-behavior: smooth; }
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Nueva tipografía */
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
     padding: 0;
-    font-size: 16px;
+    font-size: 16px; /* Cumple con accesibilidad */
 }
 
 /* ACCESIBILIDAD */
@@ -35,7 +35,7 @@ body {
 /* ENCABEZADO Y LOGO */
 .header-principal {
     background-color: #ffffff;
-    padding: 15px 50px;
+    padding: 10px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,7 +46,7 @@ body {
 }
 
 .logo-img {
-    height: 60px; /* Ajustamos el tamaño del logo */
+    height: 60px;
     width: auto;
 }
 
@@ -65,7 +65,7 @@ body {
     transition: color 0.3s;
 }
 
-.nav-hero a:hover, .nav-hero a:active { color: var(--cencocal-green); }
+.nav-hero a:hover { color: var(--cencocal-green); }
 .separador { color: #ccc; }
 
 /* BOTÓN TIENDA */
@@ -78,15 +78,13 @@ body {
     font-weight: bold;
     transition: background 0.3s;
 }
-.btn-tienda:hover { background-color: var(--bg-section); }
 
-/* SECCIÓN HERO (NUEVA CON LOGO2.PNG) */
+/* SECCIÓN HERO (BANNER CON LOGO2.PNG) */
 .hero-banner {
-    /* Usamos logo2.png con un degradado oscuro para dar contraste al texto */
-    background: linear-gradient(rgba(10, 37, 64, 0.7), rgba(10, 37, 64, 0.7)), url('assets/logo2.png');
+    background: linear-gradient(rgba(10, 37, 64, 0.75), rgba(10, 37, 64, 0.75)), url('assets/logo2.png');
     background-size: cover;
     background-position: center;
-    height: 60vh;
+    height: 65vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,73 +92,86 @@ body {
     padding: 0 20px;
 }
 
-.hero-overlay h1 { font-size: 3rem; margin-bottom: 10px; color: #fff; }
-.hero-overlay p { font-size: 1.2rem; margin-bottom: 20px; color: #fff; }
+.hero-overlay h1 { font-size: 3.2rem; margin-bottom: 10px; color: #fff; font-weight: 700; }
+.hero-overlay p { font-size: 1.3rem; margin-bottom: 25px; color: #fff; }
 
 .btn-accion {
     background-color: var(--cencocal-green);
     color: #fff;
-    padding: 12px 25px;
+    padding: 12px 30px;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
     display: inline-block;
 }
 
-/* SECCIONES Y MARCAS */
-section { padding: 60px 20px; text-align: center; }
+/* SECCIONES Y CONTENIDO DE TEXTO */
+section { padding: 80px 20px; text-align: center; }
 #nosotros { background-color: var(--bg-section); }
 
+.contenido-texto {
+    max-width: 850px; /* Limita el ancho para que no cruce toda la pantalla */
+    margin: 0 auto;
+    line-height: 1.8; /* Más espacio entre líneas */
+    font-size: 1.1rem;
+    color: #f0f0f0;
+    text-align: center;
+}
+
+.contenido-texto p { margin-bottom: 20px; }
+
+h2 {
+    font-size: 2.4rem;
+    margin-bottom: 40px;
+    color: var(--primary-color);
+}
+
+/* MARCAS */
 .seccion-blanca { background-color: #fff; color: #333; }
-
 .contenedor-marcas { max-width: 1000px; margin: 0 auto; }
-.texto-marcas h2 { font-size: 2rem; margin-bottom: 20px;}
-
 .grilla-marcas {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-top: 30px;
 }
-
-.marca-item { background-color: #f4f4f4; padding: 20px; border-radius: 8px; font-weight: bold; }
+.marca-item { background-color: #f4f4f4; padding: 25px; border-radius: 8px; font-weight: 600; color: var(--bg-color); }
 
 /* FORMULARIO */
 form {
-    max-width: 400px;
+    max-width: 450px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     text-align: left;
     background: #06182c;
-    padding: 25px;
-    border-radius: 8px;
+    padding: 30px;
+    border-radius: 10px;
 }
-
-input, textarea { padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit; }
-
+input, textarea { padding: 12px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit; }
 button {
     background-color: var(--primary-color);
-    padding: 10px;
+    padding: 12px;
     border: none;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 10px;
+    color: #000;
 }
 
 /* FOOTER */
-footer { padding: 20px; text-align: center; background: #06182c; }
+footer { padding: 30px; text-align: center; background: #051626; font-size: 0.9rem; }
 
 /* DISEÑO RESPONSIVO */
 @media (max-width: 900px) {
     .header-principal { flex-direction: column; padding: 20px; gap: 15px; }
+    .hero-overlay h1 { font-size: 2.5rem; }
 }
 
 @media (max-width: 768px) {
     .grilla-marcas { grid-template-columns: repeat(2, 1fr); }
-    .hero-overlay h1 { font-size: 2.2rem; }
+    .contenido-texto { font-size: 1rem; }
 }
 
 @media (max-width: 480px) {
