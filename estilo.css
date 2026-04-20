@@ -246,29 +246,27 @@ section { padding: 90px 20px; text-align: center; }
 
 .flip-card-back img { max-width: 85%; max-height: 85%; object-fit: contain; }
 
-/* FORMULARIO */
-form {
+/* CONTACTO (Reemplazo del formulario) */
+.caja-contacto {
     max-width: 450px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    text-align: left;
-    background: #06182c;
+    gap: 15px;
+    text-align: center; /* Lo centramos para que se vea más ordenado */
+    background: #06182c; /* Mantiene la caja azul oscura */
     padding: 30px;
     border-radius: 10px;
 }
 
-input, textarea { padding: 12px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit; }
+.caja-contacto p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
 
-button {
-    background-color: var(--primary-color);
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #000;
+.caja-contacto strong {
+    color: var(--primary-color); /* Pone los nombres de las redes en color celeste para que resalten */
 }
 
 /* FOOTER */
