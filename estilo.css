@@ -89,6 +89,22 @@ body {
     transition: background 0.3s;
 }
 
+/* BOTÓN HAMBURGUESA (Por defecto oculto en computadoras) */
+.btn-hamburguesa {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--cencocal-purple);
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: transform 0.2s ease;
+}
+
+.btn-hamburguesa:focus {
+    outline: 2px solid var(--cencocal-green);
+}
+
 /* HERO BANNER */
 .hero-banner {
     background: linear-gradient(rgba(10, 37, 64, 0.75), rgba(10, 37, 64, 0.75)), url('assets/logo2.png');
@@ -279,6 +295,40 @@ footer { padding: 30px; text-align: center; background: #051626; font-size: 0.9r
 }
 
 @media (max-width: 768px) {
+    /* Mostramos el botón hamburguesa en pantallas móviles */
+    .btn-hamburguesa {
+        display: block;
+        margin: 0 auto 10px auto;
+    }
+    
+    .header-centro {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Ocultamos la navegación móvil por defecto para que JS la controle */
+    .nav-hero {
+        display: none; 
+        flex-direction: column;
+        background-color: #ffffff;
+        width: 100%;
+        padding: 15px 0;
+        gap: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        margin-top: 10px;
+    }
+
+    /* Clase activa controlada por JS mediante classList.toggle() */
+    .nav-hero.nav-activo {
+        display: flex;
+    }
+
+    /* Ocultamos las barras separadoras en móviles */
+    .separador {
+        display: none;
+    }
+
     /* En móvil, ponemos imagen y texto uno debajo del otro */
     .contenido-flexible, .contenido-flexible.reverse {
         flex-direction: column;
@@ -293,5 +343,4 @@ footer { padding: 30px; text-align: center; background: #051626; font-size: 0.9r
 @media (max-width: 480px) {
     .grilla-marcas { grid-template-columns: 1fr; gap: 20px; }
     .nav-hero { flex-wrap: wrap; gap: 10px; }
-    .separador { display: none; }
 }

@@ -14,7 +14,7 @@ const marcasCencocal = [
 ];
 
 // ==========================================
-// 2. FUNCIÓN PARA RENDERIZAR LAS CARDS
+// 2 & 3. FUNCIÓN PARA RENDERIZAR LAS CARDS
 // ==========================================
 function renderizarCards(marcas) {
     // Seleccionamos el contenedor vacío del HTML
@@ -84,9 +84,38 @@ function inicializarBuscador() {
 }
 
 // ==========================================
+// 5. MENÚ HAMBURGUESA Y ACCESIBILIDAD ARIA
+// ==========================================
+function inicializarMenu() {
+    // Seleccionamos el botón y la navegación
+    const btnMenu = document.getElementById('btnMenu');
+    const navHero = document.querySelector('.nav-hero');
+
+    // Escuchamos el clic en el botón
+    btnMenu.addEventListener('click', () => {
+        // Alternamos (agregamos/quitamos) la clase que muestra el menú en CSS
+        navHero.classList.toggle('nav-activo');
+
+        // ACCESIBILIDAD: Verificamos si el menú está abierto o cerrado
+        const menuEstaAbierto = navHero.classList.contains('nav-activo');
+        
+        // Actualizamos el atributo aria-expanded dinámicamente
+        if (menuEstaAbierto) {
+            btnMenu.setAttribute('aria-expanded', 'true');
+            btnMenu.setAttribute('aria-label', 'Cerrar menú');
+        } else {
+            btnMenu.setAttribute('aria-expanded', 'false');
+            btnMenu.setAttribute('aria-label', 'Abrir menú');
+        }
+    });
+}
+
+// ==========================================
 // EJECUCIÓN INICIAL AL CARGAR LA PÁGINA
 // ==========================================
 // 1. Mostramos todas las tarjetas inicialmente
 renderizarCards(marcasCencocal);
 // 2. Activamos el buscador para que esté listo para usarse
 inicializarBuscador();
+// 3. Activamos el menú hamburguesa
+inicializarMenu();
