@@ -93,12 +93,29 @@
 
         <section id="contacto">
             <h2>Contacto</h2>
-            <div class="caja-contacto">
-                <p><strong>Contacto:</strong> Cencocal</p>
-                <p><strong>Fono:</strong> +56937980289</p>
-                <p><strong>Instagram:</strong> @cencocal_cl</p>
-                <p><strong>Facebook:</strong> Cencocal Prat</p>
-                <p><strong>Twitter:</strong> Cencocal_Distribución</p>
+            <div class="caja-contacto" style="max-width: 500px;">
+                <p>Déjanos tu mensaje y te contactaremos a la brevedad.</p>
+                
+                <form id="formContacto" novalidate>
+                    <div class="grupo-form">
+                        <input type="text" id="nombreContacto" placeholder="Tu Nombre (Mínimo 3 caracteres)">
+                        <span class="mensaje-error" id="errorNombre"></span>
+                    </div>
+
+                    <div class="grupo-form">
+                        <input type="email" id="emailContacto" placeholder="Tu Correo Electrónico">
+                        <span class="mensaje-error" id="errorEmail"></span>
+                    </div>
+
+                    <div class="grupo-form">
+                        <textarea id="mensajeContacto" rows="4" placeholder="Tu Mensaje (Mínimo 10 caracteres)"></textarea>
+                        <span class="mensaje-error" id="errorMensaje"></span>
+                    </div>
+
+                    <button type="submit" class="btn-accion" style="width: 100%; border: none; cursor: pointer;">Enviar Mensaje</button>
+                    
+                    <div id="mensajeExito" class="mensaje-exito" style="display: none; margin-top: 15px;"></div>
+                </form>
             </div>
         </section>
     </main>

@@ -151,7 +151,7 @@ h2::after {
     border-radius: 2px;
 }
 
-/* SECCIONES Y CONTENIDO FLEXIBLE (CON IMAGEN) */
+/* SECCIONES Y CONTENIDO FLEXIBLE */
 section { padding: 90px 20px; text-align: center; }
 #nosotros { background-color: var(--bg-section); }
 
@@ -161,10 +161,9 @@ section { padding: 90px 20px; text-align: center; }
     gap: 40px;
     max-width: 1100px;
     margin: 0 auto;
-    text-align: left; /* Texto alineado a la izquierda en PC */
+    text-align: left;
 }
 
-/* Clase para invertir el orden de texto e imagen */
 .contenido-flexible.reverse {
     flex-direction: row-reverse;
 }
@@ -262,27 +261,57 @@ section { padding: 90px 20px; text-align: center; }
 
 .flip-card-back img { max-width: 85%; max-height: 85%; object-fit: contain; }
 
-/* CONTACTO (Reemplazo del formulario) */
+/* FORMULARIO DE CONTACTO */
 .caja-contacto {
     max-width: 450px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    text-align: center; /* Lo centramos para que se vea más ordenado */
-    background: #06182c; /* Mantiene la caja azul oscura */
+    text-align: center;
+    background: #06182c; 
     padding: 30px;
     border-radius: 10px;
 }
 
-.caja-contacto p {
-    margin: 0;
-    font-size: 1.1rem;
-    color: #ffffff;
+.caja-contacto p { margin: 0; font-size: 1.1rem; color: #ffffff; }
+
+.grupo-form {
+    margin-bottom: 15px;
+    text-align: left;
 }
 
-.caja-contacto strong {
-    color: var(--primary-color); /* Pone los nombres de las redes en color celeste para que resalten */
+.grupo-form input,
+.grupo-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.grupo-form input:focus,
+.grupo-form textarea:focus {
+    outline: 2px solid var(--primary-color);
+    border-color: transparent;
+}
+
+.mensaje-error {
+    color: #ff4d4d;
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 5px;
+    min-height: 1.2rem; 
+}
+
+.mensaje-exito {
+    color: var(--cencocal-green);
+    background-color: rgba(140, 198, 63, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
 }
 
 /* FOOTER */
@@ -295,18 +324,9 @@ footer { padding: 30px; text-align: center; background: #051626; font-size: 0.9r
 }
 
 @media (max-width: 768px) {
-    /* Mostramos el botón hamburguesa en pantallas móviles */
-    .btn-hamburguesa {
-        display: block;
-        margin: 0 auto 10px auto;
-    }
+    .btn-hamburguesa { display: block; margin: 0 auto 10px auto; }
+    .header-centro { width: 100%; text-align: center; }
     
-    .header-centro {
-        width: 100%;
-        text-align: center;
-    }
-
-    /* Ocultamos la navegación móvil por defecto para que JS la controle */
     .nav-hero {
         display: none; 
         flex-direction: column;
@@ -318,18 +338,9 @@ footer { padding: 30px; text-align: center; background: #051626; font-size: 0.9r
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         margin-top: 10px;
     }
+    .nav-hero.nav-activo { display: flex; }
+    .separador { display: none; }
 
-    /* Clase activa controlada por JS mediante classList.toggle() */
-    .nav-hero.nav-activo {
-        display: flex;
-    }
-
-    /* Ocultamos las barras separadoras en móviles */
-    .separador {
-        display: none;
-    }
-
-    /* En móvil, ponemos imagen y texto uno debajo del otro */
     .contenido-flexible, .contenido-flexible.reverse {
         flex-direction: column;
         text-align: center;
