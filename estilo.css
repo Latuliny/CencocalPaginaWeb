@@ -240,3 +240,44 @@ footer {
     padding: 20px;
     background-color: #06182c;
 }
+
+/* =========================================
+   - COMPONENTES DINÁMICOS DEL CARRITO
+   ========================================= */
+.carrito-contenedor {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--bg-section);
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-left: 15px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border: 1px solid var(--primary-color);
+}
+
+#contadorCarrito {
+    color: var(--primary-color);
+    margin-left: 5px;
+}
+
+.btn-preorden {
+    display: block;
+    width: 90%;
+    margin-top: 5px;
+    background-color: var(--primary-color);
+    color: #000000;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-preorden:hover {
+    background-color: #00b9e0;
+    transform: scale(1.02);
+}
