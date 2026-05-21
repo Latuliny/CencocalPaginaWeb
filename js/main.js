@@ -61,6 +61,32 @@ function renderizarCards(marcas) {
 }
 
 // ==========================================
-// 3. EJECUTAR LA FUNCIÓN AL CARGAR
+// 4. LÓGICA DEL BUSCADOR EN TIEMPO REAL
 // ==========================================
+function inicializarBuscador() {
+    // Seleccionamos el input que creamos en el HTML
+    const inputBuscador = document.getElementById('buscadorMarcas');
+
+    // Le agregamos un 'escuchador de eventos'. 'input' se dispara cada vez que el usuario escribe o borra algo.
+    inputBuscador.addEventListener('input', (evento) => {
+        // Capturamos lo que el usuario escribió y lo pasamos a minúsculas para que la búsqueda sea exacta
+        const textoBusqueda = evento.target.value.toLowerCase();
+
+        // Filtramos el arreglo original usando el método .filter()
+        const marcasFiltradas = marcasCencocal.filter(marca => {
+            // Pasamos el nombre de la marca a minúsculas y verificamos si incluye el texto buscado
+            return marca.nombre.toLowerCase().includes(textoBusqueda);
+        });
+
+        // Volvemos a llamar a nuestra función, pero esta vez le pasamos el arreglo filtrado
+        renderizarCards(marcasFiltradas);
+    });
+}
+
+// ==========================================
+// EJECUCIÓN INICIAL AL CARGAR LA PÁGINA
+// ==========================================
+// 1. Mostramos todas las tarjetas inicialmente
 renderizarCards(marcasCencocal);
+// 2. Activamos el buscador para que esté listo para usarse
+inicializarBuscador();
