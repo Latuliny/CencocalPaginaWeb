@@ -5,23 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cencocal - Inicio</title>
     <link rel="stylesheet" href="estilo.css">
+    
+    <script src="js/main.js" defer></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <a href="#main" class="skip-link">Saltar al contenido</a>
 
     <header class="header-principal">
-        <div class="logo">
-            <img src="assets/logo.png" alt="Logo de Cencocal" class="logo-img">
+        <div class="logo-nuevo">
+            <img src="assets/logo.png" alt="Logo de distribuidora Cencocal S.A." class="logo-img">
         </div>
 
-        <nav aria-label="Navegación principal">
-            <ul>
-                <li><a href="#nosotros">Ámbito</a></li>
-                <li><a href="#historia">Historia</a></li>
-                <li><a href="#marcas">Marcas</a></li>
-                <li><a href="#contacto">Contactos</a></li>
-            </ul>
-        </nav>
+        <div class="header-centro">
+            <button id="btnMenu" class="btn-hamburguesa" aria-expanded="false" aria-label="Abrir menú">
+                ☰
+            </button>
+            
+            <nav class="nav-hero" aria-label="Navegación principal">
+                <a href="#nosotros">Ámbito</a>
+                <span class="separador">|</span>
+                <a href="#historia">Historia</a>
+                <span class="separador">|</span>
+                <a href="#marcas">Marcas</a>
+                <span class="separador">|</span>
+                <a href="#contacto">Contacto</a>
+            </nav>
+        </div>
 
         <div class="header-botones">
             <a href="#" class="btn-tienda">Ir a Tienda</a>
@@ -34,14 +47,38 @@
     </header>
 
     <main id="main">
+        <section id="hero" class="hero-banner">
+            <div class="hero-overlay">
+                <h1>Bienvenido a Cencocal</h1>
+                <p>Tu socio estratégico en distribución de productos masivos</p>
+                <a href="#nosotros" class="btn-accion">Conoce más</a>
+            </div>
+        </section>
+
         <section id="nosotros">
             <h2>Ámbito y Desempeño</h2>
-            <p><strong>Cencocal (Central de Compras La Calera S.A.)</strong> es una empresa dedicada a la distribución integral de productos de consumo masivo. Su actividad principal se centra en abastecer de manera eficiente al comercio mayorista y minorista. A través de un sólido sistema logístico, la empresa distribuye marcas estratégicas de primer nivel (como Unilever, Watt's y Softys) y gestiona marcas propias, como "CIEN". Su extensa red de distribución nacional opera desde Taltal hasta la Región Metropolitana, abarcando con gran fuerza a toda la Región de Valparaíso.</p>
+            <div class="contenido-flexible">
+                <div class="contenido-texto">
+                    <p><strong>Cencocal (Central de Compras La Calera S.A.)</strong> es una empresa dedicada a la distribución integral de productos de consumo masivo, operando con los más altos estándares de calidad.</p>
+                    <p>A través de nuestro moderno sistema logístico, logramos abastecer diariamente tanto al comercio minorista como al sector mayorista. Nuestra red cuenta con una cobertura estratégica desde Taltal hasta la Región Metropolitana.</p>
+                </div>
+                <div class="contenido-imagen">
+                    <img src="assets/logistica.png" alt="Logística de Cencocal" class="img-seccion">
+                </div>
+            </div>
         </section>
 
         <section id="historia">
             <h2>Nuestra Historia</h2>
-            <p>Distribuidora Cencocal S.A. nació en mayo de 1973 en la ciudad de La Calera. Fue creada con la finalidad inicial de atender y abastecer al comercio minorista de la zona. Con el paso de los años, su compromiso con el buen servicio le ha permitido experimentar un crecimiento sostenido, ampliando continuamente sus zonas de atención y consolidándose como un socio estratégico para miles de negocios a lo largo del país.</p>
+            <div class="contenido-flexible reverse">
+                <div class="contenido-texto">
+                    <p>Nuestra trayectoria comenzó en mayo de 1973 en la ciudad de La Calera. Lo que inició como una pequeña distribuidora local se transformó, tras casi cinco décadas de esfuerzo, en un socio estratégico de alcance nacional.</p>
+                    <p>Hoy nos enorgullece ser el pilar logístico de miles de negocios en todo Chile, manteniendo la cercanía y confianza que nos caracteriza desde nuestro origen.</p>
+                </div>
+                <div class="contenido-imagen">
+                    <img src="assets/La_CaleraChile.png" alt="Orígenes en La Calera" class="img-seccion">
+                </div>
+            </div>
         </section>
 
         <section id="marcas" class="seccion-blanca">
@@ -49,44 +86,47 @@
                 <div class="texto-marcas">
                     <h2>Nuestras principales<br><strong>marcas y proyectos</strong></h2>
                 </div>
-                <div class="grilla-marcas">
-                    <div class="marca-item"><span>Softys</span></div>
-                    <div class="marca-item"><span>SC Johnson</span></div>
-                    <div class="marca-item"><span>Carozzi</span></div>
-                    <div class="marca-item"><span>Poett</span></div>
-                    <div class="marca-item"><span>Clorox</span></div>
-                    <div class="marca-item"><span>Unilever</span></div>
-                    <div class="marca-item"><span>Soft</span></div>
-                    <div class="marca-item"><span>Sedal</span></div>
-                    <div class="marca-item"><span>Rinso</span></div>
+                
+                <div style="margin-bottom: 30px;">
+                    <input type="text" id="buscadorMarcas" placeholder="Buscar marca..." style="padding: 10px; width: 80%; max-width: 400px; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem;">
                 </div>
+                
+                <div class="grilla-marcas"></div>
+                
             </div>
         </section>
 
         <section id="contacto">
-            <h2>Contacto y Redes Sociales</h2>
-            <form action="#" method="POST">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+            <h2>Contacto</h2>
+            <div class="caja-contacto" style="max-width: 500px;">
+                <p>Déjanos tu mensaje y te contactaremos a la brevedad.</p>
                 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="mensaje">Mensaje:</label>
-                <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
-                
-                <button type="submit">Enviar</button>
-            </form>
-            <div style="margin-top: 30px;">
-                <p>Síguenos en nuestras redes:</p>
-                <a href="#" style="color: var(--primary-color); margin-right: 15px; text-decoration: none; font-weight: bold;">LinkedIn</a>
-                <a href="#" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">Instagram</a>
+                <form id="formContacto" novalidate>
+                    <div class="grupo-form">
+                        <input type="text" id="nombreContacto" placeholder="Tu Nombre (Mínimo 3 caracteres)">
+                        <span class="mensaje-error" id="errorNombre"></span>
+                    </div>
+
+                    <div class="grupo-form">
+                        <input type="email" id="emailContacto" placeholder="Tu Correo Electrónico">
+                        <span class="mensaje-error" id="errorEmail"></span>
+                    </div>
+
+                    <div class="grupo-form">
+                        <textarea id="mensajeContacto" rows="4" placeholder="Tu Mensaje (Mínimo 10 caracteres)"></textarea>
+                        <span class="mensaje-error" id="errorMensaje"></span>
+                    </div>
+
+                    <button type="submit" class="btn-accion" style="width: 100%; border: none; cursor: pointer;">Enviar Mensaje</button>
+                    
+                    <div id="mensajeExito" class="mensaje-exito" style="display: none; margin-top: 15px;"></div>
+                </form>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Cencocal. Todos los derechos reservados.</p>
+        <p>&copy; 2026 Cencocal S.A. Todos los derechos reservados.</p>
     </footer>
 
     <script src="assets/js/main.js" defer></script>
