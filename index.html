@@ -36,13 +36,9 @@
             </nav>
         </div>
 
-        <div class="header-botones">
-            <a href="#" class="btn-tienda">Ir a Tienda</a>
-    
-            <div class="carrito-contenedor">
-                <span>📋 Pre-orden: </span>
-                <span id="contadorCarrito">0</span>
-            </div>
+        <div class="header-botones" style="display: flex; gap: 15px; align-items: center;">
+            <button id="btnTema" style="background: none; border: 1px solid #ccc; padding: 5px 10px; border-radius: 5px; cursor: pointer; color: var(--cencocal-purple);">🌙 Modo Oscuro</button>
+            <a href="#" class="btn-tienda">Pre-orden (<span id="contadorCarrito">0</span>)</a>
         </div>
     </header>
 
@@ -128,7 +124,5 @@
     <footer>
         <p>&copy; 2026 Cencocal S.A. Todos los derechos reservados.</p>
     </footer>
-
-    <script src="assets/js/main.js" defer></script>
 </body>
 </html>
