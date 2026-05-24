@@ -31,8 +31,7 @@ function renderizarCards(marcas) {
         cardFront.classList.add('flip-card-front');
         
         const spanNombre = document.createElement('span');
-        // Sanitización para prevenir XSS
-        spanNombre.textContent = marca.nombre; 
+        spanNombre.textContent = marca.nombre; // Previene vulnerabilidad XSS
 
         const cardBack = document.createElement('div');
         cardBack.classList.add('flip-card-back');
@@ -55,7 +54,6 @@ function renderizarCards(marcas) {
 // ==========================================
 function inicializarBuscador() {
     const inputBuscador = document.getElementById('buscadorMarcas');
-
     inputBuscador.addEventListener('input', (evento) => {
         const textoBusqueda = evento.target.value.toLowerCase();
         const marcasFiltradas = marcasCencocal.filter(marca => {
@@ -74,7 +72,6 @@ function inicializarMenu() {
 
     btnMenu.addEventListener('click', () => {
         navHero.classList.toggle('nav-activo');
-
         const menuEstaAbierto = navHero.classList.contains('nav-activo');
         if (menuEstaAbierto) {
             btnMenu.setAttribute('aria-expanded', 'true');
@@ -87,14 +84,14 @@ function inicializarMenu() {
 }
 
 // ==========================================
-// 5. VALIDACIÓN DE FORMULARIO DE CONTACTO SEGURO
+// 5. VALIDACIÓN DE FORMULARIO DE CONTACTO (¡Recuperado!)
 // ==========================================
 function inicializarFormulario() {
     const formulario = document.getElementById('formContacto');
     if (!formulario) return; 
 
     formulario.addEventListener('submit', (evento) => {
-        evento.preventDefault(); // Evita recargar la página
+        evento.preventDefault(); 
 
         const inputNombre = document.getElementById('nombreContacto');
         const inputEmail = document.getElementById('emailContacto');
@@ -105,7 +102,6 @@ function inicializarFormulario() {
         const errorMensaje = document.getElementById('errorMensaje');
         const mensajeExito = document.getElementById('mensajeExito');
 
-        // Limpiar mensajes
         errorNombre.textContent = '';
         errorEmail.textContent = '';
         errorMensaje.textContent = '';
@@ -120,7 +116,7 @@ function inicializarFormulario() {
 
         const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!regexCorreo.test(inputEmail.value.trim())) {
-            errorEmail.textContent = 'Por favor, ingresa un correo electrónico válido.';
+            errorEmail.textContent = 'Ingresa un correo electrónico válido.';
             formularioValido = false;
         }
 
@@ -130,11 +126,71 @@ function inicializarFormulario() {
         }
 
         if (formularioValido) {
-            mensajeExito.textContent = `¡Gracias por contactarnos, ${inputNombre.value.trim()}! Hemos recibido tu mensaje de forma segura.`;
+            mensajeExito.textContent = `¡Gracias ${inputNombre.value.trim()}! Mensaje enviado.`;
             mensajeExito.style.display = 'block';
             formulario.reset();
         }
     });
+}
+
+// ==========================================
+// 6. MODO OSCURO CON LOCALSTORAGE
+// ==========================================
+function inicializarModoOscuro() {
+    const btnTema = document.getElementById('btnTema');
+    if (!btnTema) return; // Por si el botón aún no está en el HTML
+
+    const miStorage = window.localStorage;
+    const temaGuardado = miStorage.getItem('temaCencocal');
+    
+    if (temaGuardado === 'oscuro') {
+        document.body.classList.add('modo-oscuro');
+        btnTema.textContent = '☀️ Modo Claro';
+    }
+
+    btnTema.addEventListener('click', () => {
+        document.body.classList.toggle('modo-oscuro');
+        
+        if (document.body.classList.contains('modo-oscuro')) {
+            miStorage.setItem('temaCencocal', 'oscuro');
+            btnTema.textContent = '☀️ Modo Claro';
+        } else {
+            miStorage.setItem('temaCencocal', 'claro');
+            btnTema.textContent = '🌙 Modo Oscuro';
+        }
+    });
+}
+
+// ==========================================
+// 7. CARRITO DE PRE-ORDEN CON LOCALSTORAGE
+// ==========================================
+let carritoActual = JSON.parse(window.localStorage.getItem('carritoCencocal')) || [];
+
+function inicializarCarrito() {
+    actualizarContadorCarrito();
+    const contenedorMarcas = document.querySelector('.grilla-marcas');
+    
+    contenedorMarcas.addEventListener('click', (evento) => {
+        const tarjetaClickeada = evento.target.closest('.flip-card');
+        if (tarjetaClickeada) {
+            const nombreMarca = tarjetaClickeada.querySelector('.flip-card-front span').textContent;
+            const marcaSeleccionada = marcasCencocal.find(m => m.nombre === nombreMarca);
+            
+            if (marcaSeleccionada) {
+                carritoActual.push(marcaSeleccionada);
+                window.localStorage.setItem('carritoCencocal', JSON.stringify(carritoActual));
+                actualizarContadorCarrito();
+                alert(`¡${marcaSeleccionada.nombre} agregado a tu pre-orden!`);
+            }
+        }
+    });
+}
+
+function actualizarContadorCarrito() {
+    const contador = document.getElementById('contadorCarrito');
+    if (contador) {
+        contador.textContent = carritoActual.length;
+    }
 }
 
 // ==========================================
@@ -143,4 +199,6 @@ function inicializarFormulario() {
 renderizarCards(marcasCencocal);
 inicializarBuscador();
 inicializarMenu();
-inicializarFormulario();
+inicializarFormulario(); 
+inicializarModoOscuro(); 
+inicializarCarrito();    
