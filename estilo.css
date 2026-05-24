@@ -251,6 +251,7 @@ section { padding: 90px 20px; text-align: center; }
     font-weight: 600;
     font-size: 1.2rem;
     border-bottom: 4px solid var(--cencocal-green);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .flip-card-back {
@@ -354,4 +355,38 @@ footer { padding: 30px; text-align: center; background: #051626; font-size: 0.9r
 @media (max-width: 480px) {
     .grilla-marcas { grid-template-columns: 1fr; gap: 20px; }
     .nav-hero { flex-wrap: wrap; gap: 10px; }
+}
+
+/* ==========================================
+   MODO OSCURO
+   ========================================== */
+body.modo-oscuro {
+    --bg-color: #051626;
+    --bg-section: #0a2540;
+    --text-color: #e0e0e0;
+}
+
+body.modo-oscuro .seccion-blanca {
+    background-color: #0a2540;
+    color: #fff;
+}
+
+body.modo-oscuro .header-principal {
+    background-color: #113050;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+body.modo-oscuro .nav-hero a {
+    color: #fff;
+}
+
+body.modo-oscuro #btnTema {
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+body.modo-oscuro .flip-card-front {
+    background-color: #1a3a5c;
+    color: #fff;
+    border-bottom: 4px solid var(--cencocal-green);
 }
