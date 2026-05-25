@@ -43,9 +43,14 @@ body {
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: background-color 0.3s;
 }
 
-.logo-img { height: 60px; width: auto; }
+.logo-img { 
+    height: 60px; 
+    width: auto; 
+    transition: filter 0.3s ease; /* Transición suave para el filtro del logo */
+}
 
 /* NAVEGACIÓN CON SUBRAYADO ANIMADO */
 .nav-hero {
@@ -395,4 +400,9 @@ body.modo-oscuro .flip-card-front {
 body.modo-oscuro .nav-hero {
     background-color: #113050 !important; 
     box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+}
+
+/* Opción 1: Filtro para invertir el logo automáticamente en modo oscuro */
+body.modo-oscuro .logo-img {
+    filter: invert(1) brightness(1.5);
 }
