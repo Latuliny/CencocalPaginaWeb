@@ -390,3 +390,9 @@ body.modo-oscuro .flip-card-front {
     color: #fff;
     border-bottom: 4px solid var(--cencocal-green);
 }
+
+/* Corrección: Fondo oscuro para el menú móvil */
+body.modo-oscuro .nav-hero {
+    background-color: #113050; /* Mismo azul oscuro del header */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
