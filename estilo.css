@@ -1,4 +1,6 @@
-/* VARIABLES */
+/* ==========================================
+   VARIABLES CORPORATIVAS DE CENCOCAL
+   ========================================== */
 :root {
     --bg-color: #0a2540; 
     --bg-section: #113050; 
@@ -8,7 +10,9 @@
     --cencocal-green: #8cc63f;
 }
 
-/* CONFIGURACIÓN GENERAL */
+/* ==========================================
+   CONFIGURACIÓN GENERAL Y ACCESIBILIDAD
+   ========================================== */
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Poppins', sans-serif;
@@ -19,7 +23,6 @@ body {
     font-size: 16px; 
 }
 
-/* ACCESIBILIDAD */
 .skip-link {
     position: absolute;
     top: -50px;
@@ -32,7 +35,9 @@ body {
 }
 .skip-link:focus { top: 0; }
 
-/* ENCABEZADO Y LOGO */
+/* ==========================================
+   ENCABEZADO, LOGO Y NAVEGACIÓN
+   ========================================== */
 .header-principal {
     background-color: #ffffff;
     padding: 10px 50px;
@@ -49,10 +54,9 @@ body {
 .logo-img { 
     height: 60px; 
     width: auto; 
-    transition: filter 0.3s ease; /* Transición suave para el filtro del logo */
+    transition: filter 0.3s ease;
 }
 
-/* NAVEGACIÓN CON SUBRAYADO ANIMADO */
 .nav-hero {
     display: flex;
     justify-content: center;
@@ -94,7 +98,7 @@ body {
     transition: background 0.3s;
 }
 
-/* BOTÓN HAMBURGUESA (Por defecto oculto en computadoras) */
+/* BOTÓN HAMBURGUESA */
 .btn-hamburguesa {
     display: none;
     background: none;
@@ -110,7 +114,9 @@ body {
     outline: 2px solid var(--cencocal-green);
 }
 
-/* HERO BANNER */
+/* ==========================================
+   HERO BANNER Y SECCIONES
+   ========================================== */
 .hero-banner {
     background: linear-gradient(rgba(10, 37, 64, 0.75), rgba(10, 37, 64, 0.75)), url('assets/logo2.png');
     background-size: cover;
@@ -136,7 +142,6 @@ body {
     display: inline-block;
 }
 
-/* TÍTULOS DE SECCIÓN DECORADOS */
 h2 {
     font-size: 2.4rem;
     margin-bottom: 50px;
@@ -156,7 +161,6 @@ h2::after {
     border-radius: 2px;
 }
 
-/* SECCIONES Y CONTENIDO FLEXIBLE */
 section { padding: 90px 20px; text-align: center; }
 #nosotros { background-color: var(--bg-section); }
 
@@ -169,9 +173,7 @@ section { padding: 90px 20px; text-align: center; }
     text-align: left;
 }
 
-.contenido-flexible.reverse {
-    flex-direction: row-reverse;
-}
+.contenido-flexible.reverse { flex-direction: row-reverse; }
 
 .contenido-texto {
     flex: 1;
@@ -196,11 +198,11 @@ section { padding: 90px 20px; text-align: center; }
     transition: transform 0.3s ease;
 }
 
-.img-seccion:hover {
-    transform: scale(1.03);
-}
+.img-seccion:hover { transform: scale(1.03); }
 
-/* MARCAS Y FLIP CARDS */
+/* ==========================================
+   CATÁLOGO DE MARCAS (FLIP CARDS)
+   ========================================== */
 .seccion-blanca { background-color: #fff; color: #333; }
 .contenedor-marcas { max-width: 1000px; margin: 0 auto; text-align: center; }
 
@@ -267,7 +269,9 @@ section { padding: 90px 20px; text-align: center; }
 
 .flip-card-back img { max-width: 85%; max-height: 85%; object-fit: contain; }
 
-/* FORMULARIO DE CONTACTO */
+/* ==========================================
+   FORMULARIO DE CONTACTO Y FOOTER
+   ========================================== */
 .caja-contacto {
     max-width: 450px;
     margin: 0 auto;
@@ -282,10 +286,7 @@ section { padding: 90px 20px; text-align: center; }
 
 .caja-contacto p { margin: 0; font-size: 1.1rem; color: #ffffff; }
 
-.grupo-form {
-    margin-bottom: 15px;
-    text-align: left;
-}
+.grupo-form { margin-bottom: 15px; text-align: left; }
 
 .grupo-form input,
 .grupo-form textarea {
@@ -320,10 +321,11 @@ section { padding: 90px 20px; text-align: center; }
     font-weight: bold;
 }
 
-/* FOOTER */
 footer { padding: 30px; text-align: center; background: #051626; font-size: 0.9rem; }
 
-/* DISEÑO RESPONSIVO */
+/* ==========================================
+   DISEÑO RESPONSIVO (MOBILE FIRST BREAKPOINTS)
+   ========================================== */
 @media (max-width: 900px) {
     .header-principal { flex-direction: column; padding: 20px; gap: 15px; }
     .hero-overlay h1 { font-size: 2.5rem; }
@@ -363,10 +365,10 @@ footer { padding: 30px; text-align: center; background: #051626; font-size: 0.9r
 }
 
 /* ==========================================
-   ESTILOS PARA VENTANAS MODALES (SISTEMA B2B)
+   SISTEMA DE VENTANAS MODALES B2B
    ========================================== */
 .modal {
-    display: none; /* Oculto por defecto */
+    display: none; 
     position: fixed;
     z-index: 2000;
     left: 0;
@@ -416,6 +418,7 @@ footer { padding: 30px; text-align: center; background: #051626; font-size: 0.9r
     background: #f4f4f4;
     border-radius: 8px;
     color: #333;
+    margin-bottom: 5px;
 }
 
 .btn-mini {
@@ -428,13 +431,8 @@ footer { padding: 30px; text-align: center; background: #051626; font-size: 0.9r
     font-weight: bold;
 }
 
-.btn-mini:hover {
-    opacity: 0.9;
-}
-
-.btn-eliminar {
-    background: #e31837;
-}
+.btn-mini:hover { opacity: 0.9; }
+.btn-eliminar { background: #e31837; }
 
 /* ==========================================
    CONFIGURACIÓN REGLAS MODO OSCURO
@@ -455,9 +453,7 @@ body.modo-oscuro .header-principal {
     box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-body.modo-oscuro .nav-hero a {
-    color: #fff;
-}
+body.modo-oscuro .nav-hero a { color: #fff; }
 
 body.modo-oscuro #btnTema {
     color: #fff !important;
@@ -470,19 +466,16 @@ body.modo-oscuro .flip-card-front {
     border-bottom: 4px solid var(--cencocal-green);
 }
 
-/* Corrección: Fondo oscuro para el menú móvil a prueba de fallos */
 body.modo-oscuro .nav-hero {
     background-color: #113050 !important; 
     box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
 }
 
-/* Filtro para invertir el logo y eliminar el recuadro cuadrado del fondo */
 body.modo-oscuro .logo-img {
     filter: invert(1) brightness(2) grayscale(100%) !important;
     mix-blend-mode: screen !important;
 }
 
-/* Adaptación de Modales en el Tema Oscuro */
 body.modo-oscuro .modal-contenido { 
     background-color: #113050; 
     color: #fff; 
@@ -497,4 +490,58 @@ body.modo-oscuro .item-lista {
     background: #0a2540; 
     color: #fff; 
     border: 1px solid #1a3a5c; 
+}
+
+/* ==========================================
+   TOQUES PREMIUM VISUALES (CSS PURO)
+   ========================================== */
+
+/* 1. Custom Scrollbar (Barra de desplazamiento moderna) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05); 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--cencocal-purple); 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color); 
+}
+body.modo-oscuro ::-webkit-scrollbar-track {
+    background: #0a2540;
+}
+body.modo-oscuro ::-webkit-scrollbar-thumb {
+    background: #1a3a5c;
+}
+
+/* 2. Resaltado de Texto Corporativo */
+::selection {
+    background-color: var(--cencocal-green);
+    color: #ffffff;
+}
+
+/* 3. Micro-interacciones Hover en Listado de Stock */
+.item-lista {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.item-lista:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+body.modo-oscuro .item-lista:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    background-color: #15324f;
+}
+
+/* 4. Anillo de Foco Personalizado (Accesibilidad de alto contraste) */
+*:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+body.modo-oscuro *:focus-visible {
+    outline: 3px solid var(--cencocal-green);
 }
