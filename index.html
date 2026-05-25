@@ -82,7 +82,7 @@
             <h2>Nuestra Historia</h2>
             <div class="contenido-flexible reverse">
                 <div class="contenido-texto">
-                    <p>Nuestra trayectoria comenzó en mayo de 1973 en la ciudad de La Calera. Lo que inició como una pequeña distribuidora local se transformó, tras casi casi cinco décadas de esfuerzo, en un socio estratégico de alcance nacional.</p>
+                    <p>Nuestra trayectoria comenzó en mayo de 1973 en la ciudad de La Calera. Lo que inició como una pequeña distribuidora local se transformó, tras casi cinco décadas de esfuerzo, en un socio estratégico de alcance nacional.</p>
                     <p>Hoy nos enorgullece ser el pilar logístico de miles de negocios en todo Chile, manteniendo la cercanía y confianza que nos caracteriza desde nuestro origen.</p>
                 </div>
                 <div class="contenido-imagen">
@@ -133,6 +133,25 @@
                 </form>
             </div>
         </section>
+
+        <div id="modalProductos" class="modal" aria-hidden="true" tabindex="-1">
+            <div class="modal-contenido">
+                <button class="btn-cerrar" id="cerrarModalProductos" aria-label="Cerrar ventana de productos">✖</button>
+                <h3 id="tituloModalProductos" style="margin-top: 0; color: var(--cencocal-purple);">Productos</h3>
+                <div id="listaProductos" style="display: flex; flex-direction: column; gap: 10px;">
+                    </div>
+            </div>
+        </div>
+
+        <div id="modalCarrito" class="modal" aria-hidden="true" tabindex="-1">
+            <div class="modal-contenido">
+                <button class="btn-cerrar" id="cerrarModalCarrito" aria-label="Cerrar carrito">✖</button>
+                <h3 style="margin-top: 0; color: var(--cencocal-purple);">Mi Pre-orden de Stock</h3>
+                <div id="contenidoCarrito" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+                    </div>
+                <button id="btnVaciarCarrito" class="btn-accion" style="width: 100%; background-color: #e31837; border: none; cursor: pointer;">Vaciar Pre-orden</button>
+            </div>
+        </div>
     </main>
 
     <footer>

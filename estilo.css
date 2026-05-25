@@ -363,7 +363,81 @@ footer { padding: 30px; text-align: center; background: #051626; font-size: 0.9r
 }
 
 /* ==========================================
-   MODO OSCURO
+   ESTILOS PARA VENTANAS MODALES (SISTEMA B2B)
+   ========================================== */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.activo {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-contenido {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.btn-cerrar {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+}
+
+.item-lista {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    color: #333;
+}
+
+.btn-mini {
+    background: var(--cencocal-green);
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-mini:hover {
+    opacity: 0.9;
+}
+
+.btn-eliminar {
+    background: #e31837;
+}
+
+/* ==========================================
+   CONFIGURACIÓN REGLAS MODO OSCURO
    ========================================== */
 body.modo-oscuro {
     --bg-color: #051626;
@@ -406,4 +480,21 @@ body.modo-oscuro .nav-hero {
 body.modo-oscuro .logo-img {
     filter: invert(1) brightness(2) grayscale(100%) !important;
     mix-blend-mode: screen !important;
+}
+
+/* Adaptación de Modales en el Tema Oscuro */
+body.modo-oscuro .modal-contenido { 
+    background-color: #113050; 
+    color: #fff; 
+}
+
+body.modo-oscuro .btn-cerrar, 
+body.modo-oscuro #tituloModalProductos { 
+    color: #fff !important; 
+}
+
+body.modo-oscuro .item-lista { 
+    background: #0a2540; 
+    color: #fff; 
+    border: 1px solid #1a3a5c; 
 }
