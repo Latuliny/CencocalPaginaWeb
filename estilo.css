@@ -402,7 +402,8 @@ body.modo-oscuro .nav-hero {
     box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
 }
 
-/* Opción 1: Filtro para invertir el logo automáticamente en modo oscuro */
+/* Filtro para invertir el logo y eliminar el recuadro cuadrado del fondo */
 body.modo-oscuro .logo-img {
-    filter: invert(1) brightness(1.5) !important;
+    filter: invert(1) brightness(2) grayscale(100%) !important;
+    mix-blend-mode: screen !important;
 }
