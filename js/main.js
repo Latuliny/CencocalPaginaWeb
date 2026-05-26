@@ -237,7 +237,7 @@ function abrirModalProductos(marca) {
         btnAñadir.addEventListener('click', () => {
             carritoStock.push({ marca: marca.nombre, producto: productoNombre });
             guardarYActualizarCarrito();
-            alert(`¡Buena elección! Agregaste ${marcaSeleccionada.nombre} a este bloque, ¡vamos!`);
+            alert(`¡${marca.nombre} agregado a tu pre-orden!`);
         });
 
         divItem.appendChild(spanProd);
