@@ -20,7 +20,7 @@ function renderizarCards(marcas) {
     const contenedor = document.querySelector('.grilla-marcas');
     contenedor.innerHTML = ''; 
 
-    marcas.forEach(({ id, nombre, imagen }) => { // <-- Uso de desestructuración (Clean Code)
+    marcas.forEach(({ id, nombre, imagen }) => { 
         const cardItem = document.createElement('div');
         cardItem.className = 'marca-item flip-card';
         cardItem.dataset.idMarca = id;
@@ -32,7 +32,7 @@ function renderizarCards(marcas) {
         cardFront.className = 'flip-card-front';
         
         const spanNombre = document.createElement('span');
-        spanNombre.textContent = nombre; // <-- Prevención XSS
+        spanNombre.textContent = nombre; 
 
         const cardBack = document.createElement('div');
         cardBack.className = 'flip-card-back';
@@ -43,7 +43,7 @@ function renderizarCards(marcas) {
 
         cardFront.appendChild(spanNombre);
         cardBack.appendChild(imgLogo);
-        cardInner.append(cardFront, cardBack); // <-- append permite agregar varios a la vez
+        cardInner.append(cardFront, cardBack); 
         cardItem.appendChild(cardInner);
         contenedor.appendChild(cardItem);
     });
@@ -71,9 +71,8 @@ function inicializarMenu() {
     const navHero = document.querySelector('.nav-hero');
 
     btnMenu.addEventListener('click', () => {
-        const estaAbierto = navHero.classList.toggle('nav-activo'); // <-- Retorna true o false
+        const estaAbierto = navHero.classList.toggle('nav-activo'); 
         
-        // Uso de operadores ternarios para simplificar el if/else
         btnMenu.setAttribute('aria-expanded', estaAbierto);
         btnMenu.setAttribute('aria-label', estaAbierto ? 'Cerrar menú' : 'Abrir menú');
         
@@ -104,7 +103,6 @@ function inicializarFormulario() {
         };
         const mensajeExito = document.getElementById('mensajeExito');
 
-        // Limpieza inicial
         Object.values(errores).forEach(err => err.textContent = '');
         mensajeExito.style.display = 'none';
 
@@ -113,7 +111,7 @@ function inicializarFormulario() {
 
         if (nombre.length < 3) { 
             errores.nombre.textContent = 'Mínimo 3 caracteres.'; 
-            esValido = false; 
+            // AQUÍ FALTA ALGO INTENCIONALMENTE
         }
         if (!regexCorreo.test(email)) { 
             errores.email.textContent = 'Correo inválido.'; 
@@ -149,7 +147,6 @@ function inicializarModoOscuro() {
     btnTema.addEventListener('click', () => {
         const esOscuro = document.body.classList.toggle('modo-oscuro');
         
-        // Uso de ternarios para ahorrar 6 líneas de código
         window.localStorage.setItem('temaCencocal', esOscuro ? 'oscuro' : 'claro');
         btnTema.textContent = esOscuro ? '☀️ Modo Claro' : '🌙 Modo Oscuro';
     });
@@ -167,7 +164,7 @@ function inicializarSistemaB2B() {
     
     document.querySelector('.grilla-marcas').addEventListener('click', (evento) => {
         const tarjeta = evento.target.closest('.flip-card');
-        if (!tarjeta) return; // Cláusula de guarda
+        if (!tarjeta) return; 
         
         const marcaId = parseInt(tarjeta.dataset.idMarca);
         const marcaSel = marcasCencocal.find(m => m.id === marcaId);
@@ -189,7 +186,7 @@ function inicializarSistemaB2B() {
     });
 }
 
-function abrirModalProductos({ nombre, productos }) { // <-- Desestructuración en los parámetros
+function abrirModalProductos({ nombre, productos }) { 
     document.getElementById('tituloModalProductos').textContent = `Catálogo: ${nombre}`;
     const contenedorLista = document.getElementById('listaProductos');
     contenedorLista.innerHTML = '';
@@ -253,7 +250,6 @@ function renderizarListaCarrito() {
     });
 }
 
-// Funciones de utilidad unificadas
 function abrirModal(modalDOM, focoId) {
     modalDOM.classList.add('activo');
     modalDOM.setAttribute('aria-hidden', 'false');
@@ -281,9 +277,6 @@ function actualizarContadorCarrito() {
     if (contador) contador.textContent = carritoStock.length;
 }
 
-// ==========================================
-// INICIALIZACIÓN
-// ==========================================
 renderizarCards(marcasCencocal);
 inicializarBuscador();
 inicializarMenu();
