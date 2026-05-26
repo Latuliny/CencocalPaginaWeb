@@ -133,13 +133,18 @@ function inicializarFormulario() {
 }
 
 // ==========================================
-// 6. MODO OSCURO CON LOCALSTORAGE
+// 6. MODO OSCURO CON LOCALSTORAGE Y PREFERENCIA DEL SISTEMA
 // ==========================================
 function inicializarModoOscuro() {
     const btnTema = document.getElementById('btnTema');
+    if (!btnTema) return; // Cláusula de guarda: si no hay botón, no ejecuta el resto para evitar errores
+
     const temaGuardado = window.localStorage.getItem('temaCencocal');
+    // Verifica si el sistema operativo del usuario (Windows/Android/Mac) está en modo oscuro
+    const prefiereOscuro = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    if (temaGuardado === 'oscuro') {
+    // Activa el modo oscuro si el usuario lo guardó antes, O si es su primera vez y su sistema es oscuro
+    if (temaGuardado === 'oscuro' || (!temaGuardado && prefiereOscuro)) {
         document.body.classList.add('modo-oscuro');
         btnTema.textContent = '☀️ Modo Claro';
     }
