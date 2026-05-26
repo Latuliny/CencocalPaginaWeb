@@ -1,5 +1,5 @@
 // ==========================================
-// 1. BASE DE DATOS LOCAL (MARCAS Y PRODUCTOS)
+// 1. ARREGLO DE OBJETOS EXPANDIDO (DATOS Y PRODUCTOS)
 // ==========================================
 const marcasCencocal = [
     { id: 1, nombre: "Softys", imagen: "assets/softys.png", productos: ["Confort Noble", "Toallas Nova", "Pañuelos Elite"] },
@@ -14,36 +14,39 @@ const marcasCencocal = [
 ];
 
 // ==========================================
-// 2. RENDERIZADO DINÁMICO DE TARJETAS
+// 2. FUNCIÓN PARA RENDERIZAR LAS CARDS DE MARCAS
 // ==========================================
+/**
+ * Genera dinámicamente las tarjetas de marcas en el DOM.
+ * Parámetro: "marcas" (Array) - Arreglo de objetos con los datos a mostrar.
+ */
 function renderizarCards(marcas) {
     const contenedor = document.querySelector('.grilla-marcas');
     contenedor.innerHTML = ''; 
 
-    marcas.forEach(({ id, nombre, imagen }) => { 
+    marcas.forEach(marca => {
         const cardItem = document.createElement('div');
-        cardItem.className = 'marca-item flip-card';
-        cardItem.dataset.idMarca = id;
+        cardItem.classList.add('marca-item', 'flip-card');
+        cardItem.dataset.idMarca = marca.id; // Vinculamos el ID para el modal
 
         const cardInner = document.createElement('div');
-        cardInner.className = 'flip-card-inner';
+        cardInner.classList.add('flip-card-inner');
 
         const cardFront = document.createElement('div');
-        cardFront.className = 'flip-card-front';
-        
+        cardFront.classList.add('flip-card-front');
         const spanNombre = document.createElement('span');
-        spanNombre.textContent = nombre; 
+        spanNombre.textContent = marca.nombre; // Previene vulnerabilidad XSS
 
         const cardBack = document.createElement('div');
-        cardBack.className = 'flip-card-back';
-        
+        cardBack.classList.add('flip-card-back');
         const imgLogo = document.createElement('img');
-        imgLogo.src = imagen;
-        imgLogo.alt = `Logo de ${nombre}`;
+        imgLogo.src = marca.imagen;
+        imgLogo.alt = `Logo de ${marca.nombre}`;
 
         cardFront.appendChild(spanNombre);
         cardBack.appendChild(imgLogo);
-        cardInner.append(cardFront, cardBack); 
+        cardInner.appendChild(cardFront);
+        cardInner.appendChild(cardBack);
         cardItem.appendChild(cardInner);
         contenedor.appendChild(cardItem);
     });
@@ -52,33 +55,42 @@ function renderizarCards(marcas) {
 // ==========================================
 // 3. BUSCADOR EN TIEMPO REAL
 // ==========================================
+/**
+ * Inicializa el evento input del buscador para filtrar marcas en tiempo real.
+ * Utiliza el método filter() sobre el arreglo principal.
+ */
 function inicializarBuscador() {
     const inputBuscador = document.getElementById('buscadorMarcas');
-    inputBuscador.addEventListener('input', ({ target }) => {
-        const textoBusqueda = target.value.toLowerCase();
-        const marcasFiltradas = marcasCencocal.filter(({ nombre }) => 
-            nombre.toLowerCase().includes(textoBusqueda)
+    inputBuscador.addEventListener('input', (evento) => {
+        const textoBusqueda = evento.target.value.toLowerCase();
+        const marcasFiltradas = marcasCencocal.filter(marca => 
+            marca.nombre.toLowerCase().includes(textoBusqueda)
         );
         renderizarCards(marcasFiltradas);
     });
 }
 
 // ==========================================
-// 4. MENÚ HAMBURGUESA Y ACCESIBILIDAD
+// 4. MENÚ HAMBURGUESA Y ACCESIBILIDAD ARIA
 // ==========================================
+/**
+ * Controla la apertura/cierre del menú en móviles.
+ * Gestiona atributos ARIA y traslada el foco para lectores de pantalla.
+ */
 function inicializarMenu() {
     const btnMenu = document.getElementById('btnMenu');
     const navHero = document.querySelector('.nav-hero');
 
     btnMenu.addEventListener('click', () => {
-        const estaAbierto = navHero.classList.toggle('nav-activo'); 
-        
-        btnMenu.setAttribute('aria-expanded', estaAbierto);
-        btnMenu.setAttribute('aria-label', estaAbierto ? 'Cerrar menú' : 'Abrir menú');
-        
-        if (estaAbierto) {
+        navHero.classList.toggle('nav-activo');
+        if (navHero.classList.contains('nav-activo')) {
+            btnMenu.setAttribute('aria-expanded', 'true');
+            btnMenu.setAttribute('aria-label', 'Cerrar menú');
             navHero.setAttribute('tabindex', '-1');
-            navHero.focus();
+            navHero.focus(); // Accesibilidad: Mueve el foco al menú
+        } else {
+            btnMenu.setAttribute('aria-expanded', 'false');
+            btnMenu.setAttribute('aria-label', 'Abrir menú');
         }
     });
 }
@@ -86,74 +98,79 @@ function inicializarMenu() {
 // ==========================================
 // 5. VALIDACIÓN DE FORMULARIO DE CONTACTO 
 // ==========================================
+/**
+ * Previene el envío por defecto y valida los campos del formulario.
+ * Incorpora Regex y sanitización (textContent) para prevenir Inyección XSS.
+ */
 function inicializarFormulario() {
     const formulario = document.getElementById('formContacto');
     if (!formulario) return; 
 
     formulario.addEventListener('submit', (evento) => {
         evento.preventDefault(); 
-        const nombre = document.getElementById('nombreContacto').value.trim();
-        const email = document.getElementById('emailContacto').value.trim();
-        const mensaje = document.getElementById('mensajeContacto').value.trim();
+        const inputNombre = document.getElementById('nombreContacto');
+        const inputEmail = document.getElementById('emailContacto');
+        const inputMensaje = document.getElementById('mensajeContacto');
         
-        const errores = {
-            nombre: document.getElementById('errorNombre'),
-            email: document.getElementById('errorEmail'),
-            mensaje: document.getElementById('errorMensaje')
-        };
+        const errorNombre = document.getElementById('errorNombre');
+        const errorEmail = document.getElementById('errorEmail');
+        const errorMensaje = document.getElementById('errorMensaje');
         const mensajeExito = document.getElementById('mensajeExito');
 
-        Object.values(errores).forEach(err => err.textContent = '');
+        errorNombre.textContent = ''; 
+        errorEmail.textContent = ''; 
+        errorMensaje.textContent = '';
         mensajeExito.style.display = 'none';
 
-        let esValido = true;
-        const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        let formularioValido = true;
 
-        if (nombre.length < 3) { 
-            errores.nombre.textContent = 'Mínimo 3 caracteres.'; 
-            // AQUÍ FALTA ALGO INTENCIONALMENTE
+        if (inputNombre.value.trim().length < 3) { 
+            errorNombre.textContent = 'Mínimo 3 caracteres.'; 
+            formularioValido = false; 
         }
-        if (!regexCorreo.test(email)) { 
-            errores.email.textContent = 'Correo inválido.'; 
-            esValido = false; 
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail.value.trim())) { 
+            errorEmail.textContent = 'Correo inválido.'; 
+            formularioValido = false; 
         }
-        if (mensaje.length < 10) { 
-            errores.mensaje.textContent = 'Mínimo 10 caracteres.'; 
-            esValido = false; 
+        if (inputMensaje.value.trim().length < 10) { 
+            errorMensaje.textContent = 'Mínimo 10 caracteres.'; 
+            formularioValido = false; 
         }
 
-        if (esValido) {
-            mensajeExito.textContent = `¡Gracias ${nombre}! Mensaje enviado.`;
+        if (formularioValido) {
+            mensajeExito.textContent = `¡Gracias ${inputNombre.value.trim()}! Mensaje enviado.`;
             mensajeExito.style.display = 'block';
             mensajeExito.setAttribute('tabindex', '-1');
-            mensajeExito.focus();
+            mensajeExito.focus(); // Accesibilidad: Mueve el foco al mensaje
             formulario.reset();
         }
     });
 }
 
 // ==========================================
-// 6. MODO OSCURO CON LOCALSTORAGE Y PREFERENCIA DEL SISTEMA
+// 6. MODO OSCURO CON LOCALSTORAGE
 // ==========================================
+/**
+ * Alterna el tema visual del sitio y guarda la preferencia en LocalStorage.
+ */
 function inicializarModoOscuro() {
     const btnTema = document.getElementById('btnTema');
-    if (!btnTema) return; // Cláusula de guarda: si no hay botón, no ejecuta el resto para evitar errores
-
     const temaGuardado = window.localStorage.getItem('temaCencocal');
-    // Verifica si el sistema operativo del usuario (Windows/Android/Mac) está en modo oscuro
-    const prefiereOscuro = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    // Activa el modo oscuro si el usuario lo guardó antes, O si es su primera vez y su sistema es oscuro
-    if (temaGuardado === 'oscuro' || (!temaGuardado && prefiereOscuro)) {
+    if (temaGuardado === 'oscuro') {
         document.body.classList.add('modo-oscuro');
         btnTema.textContent = '☀️ Modo Claro';
     }
 
     btnTema.addEventListener('click', () => {
-        const esOscuro = document.body.classList.toggle('modo-oscuro');
-        
-        window.localStorage.setItem('temaCencocal', esOscuro ? 'oscuro' : 'claro');
-        btnTema.textContent = esOscuro ? '☀️ Modo Claro' : '🌙 Modo Oscuro';
+        document.body.classList.toggle('modo-oscuro');
+        if (document.body.classList.contains('modo-oscuro')) {
+            window.localStorage.setItem('temaCencocal', 'oscuro');
+            btnTema.textContent = '☀️ Modo Claro';
+        } else {
+            window.localStorage.setItem('temaCencocal', 'claro');
+            btnTema.textContent = '🌙 Modo Oscuro';
+        }
     });
 }
 
@@ -164,26 +181,33 @@ let carritoStock = JSON.parse(window.localStorage.getItem('carritoCencocalStock'
 const modalProductos = document.getElementById('modalProductos');
 const modalCarrito = document.getElementById('modalCarrito');
 
+/**
+ * Inicializa los eventos para abrir modales de productos y el carrito.
+ */
 function inicializarSistemaB2B() {
     actualizarContadorCarrito();
     
+    // Abrir Modal de Productos al clickear una Marca (Uso de find)
     document.querySelector('.grilla-marcas').addEventListener('click', (evento) => {
         const tarjeta = evento.target.closest('.flip-card');
-        if (!tarjeta) return; 
-        
-        const marcaId = parseInt(tarjeta.dataset.idMarca);
-        const marcaSel = marcasCencocal.find(m => m.id === marcaId);
-        abrirModalProductos(marcaSel);
+        if (tarjeta) {
+            const marcaId = parseInt(tarjeta.dataset.idMarca);
+            const marcaSel = marcasCencocal.find(m => m.id === marcaId);
+            abrirModalProductos(marcaSel);
+        }
     });
 
+    // Abrir Modal del Carrito al clickear el botón superior
     document.querySelector('.btn-tienda').addEventListener('click', (evento) => {
         evento.preventDefault();
         abrirModalCarrito();
     });
 
+    // Botones para cerrar modales
     document.getElementById('cerrarModalProductos').addEventListener('click', () => cerrarModal(modalProductos));
     document.getElementById('cerrarModalCarrito').addEventListener('click', () => cerrarModal(modalCarrito));
     
+    // Botón para vaciar todo el carrito
     document.getElementById('btnVaciarCarrito').addEventListener('click', () => {
         carritoStock = [];
         guardarYActualizarCarrito();
@@ -191,37 +215,51 @@ function inicializarSistemaB2B() {
     });
 }
 
-function abrirModalProductos({ nombre, productos }) { 
-    document.getElementById('tituloModalProductos').textContent = `Catálogo: ${nombre}`;
+/**
+ * Muestra la lista de productos de una marca en un modal dinámico
+ * Parámetro: "marca" (Object) - Objeto con los datos y productos de la marca
+ */
+function abrirModalProductos(marca) {
+    document.getElementById('tituloModalProductos').textContent = `Catálogo: ${marca.nombre}`;
     const contenedorLista = document.getElementById('listaProductos');
     contenedorLista.innerHTML = '';
 
-    productos.forEach(productoNombre => {
+    marca.productos.forEach(productoNombre => {
         const divItem = document.createElement('div');
-        divItem.className = 'item-lista';
+        divItem.classList.add('item-lista');
         
         const spanProd = document.createElement('span');
         spanProd.textContent = productoNombre;
         
         const btnAñadir = document.createElement('button');
-        btnAñadir.className = 'btn-mini';
+        btnAñadir.classList.add('btn-mini');
         btnAñadir.textContent = 'Añadir';
         btnAñadir.addEventListener('click', () => {
-            carritoStock.push({ marca: nombre, producto: productoNombre });
+            carritoStock.push({ marca: marca.nombre, producto: productoNombre });
             guardarYActualizarCarrito();
-            alert(`¡${nombre} agregado a tu pre-orden!`);
+            alert(`¡${marca.nombre} agregado a tu pre-orden!`);
         });
 
-        divItem.append(spanProd, btnAñadir);
+        divItem.appendChild(spanProd);
+        divItem.appendChild(btnAñadir);
         contenedorLista.appendChild(divItem);
     });
 
-    abrirModal(modalProductos, 'tituloModalProductos');
+    modalProductos.classList.add('activo');
+    modalProductos.setAttribute('aria-hidden', 'false');
+    document.getElementById('tituloModalProductos').setAttribute('tabindex', '-1');
+    document.getElementById('tituloModalProductos').focus(); // Accesibilidad: Foco en Modal
 }
 
+/**
+ * Muestra el contenido actual del carrito permitiendo eliminar ítems (splice)
+ */
 function abrirModalCarrito() {
     renderizarListaCarrito();
-    abrirModal(modalCarrito, null);
+    modalCarrito.classList.add('activo');
+    modalCarrito.setAttribute('aria-hidden', 'false');
+    modalCarrito.setAttribute('tabindex', '-1');
+    modalCarrito.focus(); // Accesibilidad: Foco en Modal
 }
 
 function renderizarListaCarrito() {
@@ -233,38 +271,27 @@ function renderizarListaCarrito() {
         return;
     }
 
-    carritoStock.forEach(({ marca, producto }, index) => {
+    carritoStock.forEach((item, index) => {
         const divItem = document.createElement('div');
-        divItem.className = 'item-lista';
+        divItem.classList.add('item-lista');
         
         const spanDetalle = document.createElement('span');
-        spanDetalle.textContent = `${marca} - ${producto}`;
+        spanDetalle.textContent = `${item.marca} - ${item.producto}`;
         
         const btnEliminar = document.createElement('button');
-        btnEliminar.className = 'btn-mini btn-eliminar';
+        btnEliminar.classList.add('btn-mini', 'btn-eliminar');
         btnEliminar.textContent = '🗑️';
-        btnEliminar.setAttribute('aria-label', `Eliminar ${producto}`);
+        btnEliminar.setAttribute('aria-label', `Eliminar ${item.producto}`);
         btnEliminar.addEventListener('click', () => {
-            carritoStock.splice(index, 1);
+            carritoStock.splice(index, 1); // Elimina 1 elemento usando su índice
             guardarYActualizarCarrito();
-            renderizarListaCarrito(); 
+            renderizarListaCarrito(); // Re-dibuja el DOM actualizado
         });
 
-        divItem.append(spanDetalle, btnEliminar);
+        divItem.appendChild(spanDetalle);
+        divItem.appendChild(btnEliminar);
         contenedor.appendChild(divItem);
     });
-}
-
-function abrirModal(modalDOM, focoId) {
-    modalDOM.classList.add('activo');
-    modalDOM.setAttribute('aria-hidden', 'false');
-    if (focoId) {
-        document.getElementById(focoId).setAttribute('tabindex', '-1');
-        document.getElementById(focoId).focus();
-    } else {
-        modalDOM.setAttribute('tabindex', '-1');
-        modalDOM.focus();
-    }
 }
 
 function cerrarModal(modalDOM) {
@@ -273,6 +300,7 @@ function cerrarModal(modalDOM) {
 }
 
 function guardarYActualizarCarrito() {
+    // Convierte el arreglo a String JSON para LocalStorage
     window.localStorage.setItem('carritoCencocalStock', JSON.stringify(carritoStock));
     actualizarContadorCarrito();
 }
@@ -282,6 +310,9 @@ function actualizarContadorCarrito() {
     if (contador) contador.textContent = carritoStock.length;
 }
 
+// ==========================================
+// EJECUCIÓN INICIAL 
+// ==========================================
 renderizarCards(marcasCencocal);
 inicializarBuscador();
 inicializarMenu();
